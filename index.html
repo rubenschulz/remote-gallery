@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<meta name='viewport'  content='width=device-width, initial-scale=1.0, user-scalable=0, maximum-scale=1.0' />
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css' />
+		<link rel='stylesheet' href='./style/touchtouch/touchTouch.css' />
+		<title>Remote Gallery</title>
+	</head>
+
+	<body>
+
+		<header>
+			<div class='row'>
+				<div class='small-12 columns'>
+
+					<h1 class='text-center'>Remote Gallery</h1>
+		
+					<p>
+	 					Please enter the URL of the first photo of a set and the number of photos you want to view.
+	 					The gallery will be generated automatically.
+					</p>
+
+				</div>
+			</div>
+
+			<div class='row'>
+				<div class='small-12 columns'>
+
+					<fieldset>
+						<form action='index.html' method='GET'>
+							<div class='row'>
+								<div class='small-12 medium-8 columns'>
+									<input type='text' name='photo'  id='photo'  value='' placeholder='First photo URL'>
+								</div>
+								<div class='small-12 medium-2 columns'>
+									<input type='text' name='amount' id='amount' value='' placeholder='Amounrt'>
+								</div>
+								<div class='small-12 medium-2 columns'>
+									<button type='submit' class='button simple'>View gallery!</button>
+								</div>
+							</div>
+						</form>
+					</fieldset>
+
+				</div>
+			</div>
+
+			<hr />
+
+		</header>
+
+		<main>
+
+			<div class='row'>
+				<div class='small-12 columns'>
+
+					<section id='gallery'>
+						<div class='row small-up-2 medium-up-4 large-up-6'>
+							
+							<p>
+								Example galleries:
+							</p>
+							<ul>
+								<li>
+									<a href='./index.html?photo=https://www.carsbase.com/photo/BMW-6_Series_Gran_Turismo_mp2_pic_179352.jpg&amount=25'>
+										BMW 6 Series Gran Turismo (25 photos)
+									</a>
+									<small>Source: Carsbase.com</small>
+								</li>
+								<li>
+									<a href='./index.html?photo=http://www.bodypaintingx.com/images/Gallery/Dec%202011/BPX01.jpg&amount=50'>
+										Body painting festival (50 photos)
+									</a>
+									<small>Source: Bodypaintingx.com</small>
+								</li>
+								<li>
+									<a href='./index.html?photo=http://www.warrenphotographic.co.uk/photography/cats/35600.jpg&amount=100'>
+										Cute kittens (100 photos)
+									</a>
+									<small>Source: Warrenphotographic.co.uk</small>
+								</li>
+								<li>
+									<a href='./index.html?photo=http://www.letour.fr/PHOTOS/TDF/2017/RIDERS/1.jpg&amount=220'>
+										Le Tour de France 2017 riders (220 photos)
+									</a>
+									<small>Source: Letour.fr</small>
+								</li>
+							</ul>
+
+						</div>
+					</section>
+
+					<section id='errors' class='callout warning hide'>
+						<ul></ul>
+					</section>
+
+				</div>
+			</div>
+
+		</main>
+
+		<footer>
+			<div class='row'>
+				<div class='small-12 columns text-center'>
+
+					<hr />
+
+					<small>Copyright 2017 Digital Devils</small>
+		
+				</div>
+			</div>
+		</footer>
+
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js'></script>
+		<script src='./scripts/touchtouch/touchTouch.jquery.js'></script>
+		<script src='./scripts/remotegallery/remotegallery.js'></script>
+		<script>
+			/***
+			 * @copyright 2017 Digital Devils BV
+			 * @author    Digital Devils BV <info@digitaldevils.nl>
+			 * @package   Remote Gallery
+			 * @link      https://www.digitaldevils.nl/
+			 * @version   1.0
+			***/
+
+			// Start Foundation
+			$(document).foundation();
+
+			$(document).ready(function(){
+				// Build gallery
+				remoteGallery.buildGallery({
+					'gallery'  : '#gallery .row',
+					'errors'   : '#errors',
+					'complete' : function(){
+						// Reset touchtouch placeholders
+						$('#gallerySlider .placeholder').remove();
+
+						// Init touchtouch
+						$('#gallery .row a').touchTouch();
+					}
+				});
+			});
+		</script>
+
+	</body>
+</html>
